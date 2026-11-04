@@ -1,5 +1,12 @@
 const sql = require("mssql/msnodesqlv8");
+
 const connectionString = process.env.DB_CONNECTION_STRING;
+
+if (!connectionString) {
+  throw new Error(
+    "Falta la variable DB_CONNECTION_STRING. Copie .env.example a .env y configure SQL Server.",
+  );
+}
 
 let poolPromise;
 
@@ -13,4 +20,14 @@ function getPool() {
   return poolPromise;
 }
 
-module.exports = { sql, getPool, connectionString };
+async function closePool() {
+  if (poolPromise) {
+    const pool = await poolPromise.catch(() => null);
+    if (pool) {
+      await pool.close();
+    }
+    poolPromise = undefined;
+  }
+}
+
+module.exports = { sql, getPool, closePool };

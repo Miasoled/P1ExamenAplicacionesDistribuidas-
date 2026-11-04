@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PrimeVideoDB - CRUD de contenidos</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>PrimeVideoDB</h1>
+      <div class="header-info">
+        <span id="totalInfo">— registros</span>
+        <span id="wsStatus" class="status">Conectando...</span>
+      </div>
+    </header>
+
+    <main>
+      <section id="formCard" class="card hidden">
+        <div class="section-head">
+          <h2 id="formTitle">Nuevo contenido</h2>
+          <button id="closeFormBtn" type="button" class="secondary">Cerrar</button>
+        </div>
+
+        <form id="contentForm">
+          <input type="hidden" id="contentId" />
+
+          <label class="full">
+            <span>Título *</span>
+            <input id="title" maxlength="500" required />
+          </label>
+
+          <label>
+            <span>Source ID *</span>
+            <input id="source_id" maxlength="20" required />
+          </label>
+
+          <label>
+            <span>Tipo *</span>
+            <select id="content_type" required>
+              <option value="MOVIE">Película</option>
+              <option value="TV_SHOW">Serie</option>
+              <option value="OTHER">Otro</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Año</span>
+            <input id="release_year" type="number" min="1800" max="2100" />
+          </label>
+
+          <label>
+            <span>Clasificación</span>
+            <input id="rating" maxlength="30" />
+          </label>
+
+          <label>
+            <span>Fecha de alta</span>
+            <input id="date_added" type="date" />
+          </label>
+
+          <label>
+            <span>Duración (número)</span>
+            <input id="duration_value" type="number" min="0" />
+          </label>
+
+          <label>
+            <span>Unidad</span>
+            <select id="duration_unit">
+              <option value="">Sin unidad</option>
+              <option value="MINUTES">Minutos</option>
+              <option value="SEASONS">Temporadas</option>
+              <option value="OTHER">Otra</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Texto de duración</span>
+            <input id="duration_text" maxlength="50" />
+          </label>
+
+          <label class="full">
+            <span>Descripción</span>
+            <textarea id="description" rows="3"></textarea>
+          </label>
+
+          <div id="formMessage" class="message hidden"></div>
+
+          <div class="form-actions">
+            <button id="saveBtn" type="submit">Guardar</button>
+            <button id="cancelBtn" type="button" class="secondary">Cancelar</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="section-head">
+          <h2>Contenidos</h2>
+          <div class="filters">
+            <button id="createBtn" type="button">+ Crear</button>
+            <button id="workerBtn" type="button" class="secondary">Ejecutar Worker</button>
+            <input id="search" type="search" placeholder="Buscar por título o source_id" />
+            <select id="typeFilter">
+              <option value="">Todos</option>
+              <option value="MOVIE">Películas</option>
+              <option value="TV_SHOW">Series</option>
+              <option value="OTHER">Otros</option>
+            </select>
+            <select id="pageSize">
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+            </select>
+          </div>
+        </div>
+
+        <p id="workerResult" class="worker-result hidden"></p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Tipo</th>
+                <th>Año</th>
+                <th>Rating</th>
+                <th>Duración</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+
+        <div class="pager">
+          <button id="prev" type="button" class="secondary" disabled>Anterior</button>
+          <span id="pageInfo">Página 1</span>
+          <button id="next" type="button" class="secondary" disabled>Siguiente</button>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

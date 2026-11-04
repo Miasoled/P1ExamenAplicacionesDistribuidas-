@@ -1,0 +1,30 @@
+{
+  "name": "p1examen",
+  "version": "1.0.0",
+  "description": "CRUD de PrimeVideoDB con WebSockets y Worker Threads",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "worker": "node scripts/run-stats-worker.js",
+    "verify-db": "node scripts/verify-db.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "msnodesqlv8": "^6.0.0",
+    "mssql": "^11.0.1",
+    "socket.io": "^4.8.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Miasoled/P1ExamenAplicacionesDistribuidas-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Miasoled/P1ExamenAplicacionesDistribuidas-/issues"
+  },
+  "homepage": "https://github.com/Miasoled/P1ExamenAplicacionesDistribuidas-#readme"
+}
